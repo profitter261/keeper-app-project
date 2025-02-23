@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keeper App</title>
+    <style> 
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+            background-image: url('./images/OKBX0V0.jpg');
+        }
+        .container {
+            width: 300px;
+            height: 100px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(128, 126, 126, 0.1);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .note {
+            background: #3e3e3b;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            color: rgb(251, 247, 247);
+            width: 300px;
+        }
+        .addbutton {
+            height: 60px;
+            background: white;
+            color: rgb(19, 9, 9);
+            border: none;
+            padding: 5px 10px;
+            margin-top: 0px;
+            margin-left: 300px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .deletebutton {
+           margin-left: 260px;
+        }
+        #noteTitle, #noteContent {
+            width: 80%;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        #noteContent {
+            height: 60px;
+            resize: none;
+        }
+        #notes {
+            width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+   <nav><h1>Keeper App</h1></nav>
+    <div class="container">
+        <input type="text" id="noteTitle" placeholder="Enter title" />
+        <textarea id="noteContent" placeholder="Enter content (max 120 chars)" maxlength="120"></textarea>
+        <button onclick="addNote()" class="addbutton">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-plus" viewBox="0 0 16 16">
+                <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5"/>
+                <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
+            </svg>
+        </button>
+    </div>
+    <div id="notes"></div>
+
+    <script>
+        function addNote() {
+            let noteTitle = document.getElementById("noteTitle").value;
+            let noteContent = document.getElementById("noteContent").value;
+            if (noteTitle === "" || noteContent === "") return;
+            
+            let noteDiv = document.createElement("div");
+            noteDiv.classList.add("note");
+            noteDiv.innerHTML = `<strong>${noteTitle}</strong><br>${noteContent} <button onclick="deleteNote(this)" class="deletebutton"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-minus-fill" viewBox="0 0 16 16">
+  <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M6 8.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1 0-1"/>
+</svg></button>`;
+            
+            document.getElementById("notes").appendChild(noteDiv);
+            document.getElementById("noteTitle").value = "";
+            document.getElementById("noteContent").value = "";
+        }
+        
+        function deleteNote(button) {
+            button.parentElement.remove();
+        }
+    </script>
+</body>
+</html>
